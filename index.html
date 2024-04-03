@@ -28,6 +28,63 @@
             margin-right: 10px;
         }
     </style>
+<script>
+    function createToken(userName,kid,secret,iss,scp){
+  var header = {
+    "alg": "HS256",
+    "typ": "JWT",
+    "iss": iss, //CONNECTED APP ID
+    "kid": kid, //CONNECTED APP SECRET ID
+  };
+  var stringifiedHeader = CryptoJS.enc.Utf8.parse(JSON.stringify(header));
+  var encodedHeader = base64url(stringifiedHeader);
+  var claimSet = {
+    "sub": userName, // THE USER NAME, like aalteirac@tableau.com 
+    "aud":"tableau",
+    "nbf":Math.round(new Date().getTime()/1000)-100,
+    "jti":new Date().getTime().toString(),
+    "iss": iss,
+    "scp": scp.split(","),
+    "exp": Math.round(new Date().getTime()/1000)+100
+  };
+  var stringifiedData = CryptoJS.enc.Utf8.parse(JSON.stringify(claimSet));
+  var encodedData = base64url(stringifiedData);
+  var token = encodedHeader + "." + encodedData;
+  var signature = CryptoJS.HmacSHA256(token, secret); //CONNECTED APP SECRET
+  signature = base64url(signature);
+  var signedToken = token + "." + signature;
+  return signedToken;
+}
+
+//Base64URL is a modification of the main (https://base64.guru/standards/main) Base64 standard. 
+function base64url(source) {
+  encodedSource = CryptoJS.enc.Base64.stringify(source);
+  encodedSource = encodedSource.replace(/=+$/, '');
+  encodedSource = encodedSource.replace(/\+/g, '-');
+  encodedSource = encodedSource.replace(/\//g, '_');
+  return encodedSource;
+}
+function go(){
+    var userid="jkeegan@salesforce.com"
+    var iss=document.getElementById('iss').value
+    var kid=document.getElementById('kid').value
+    var secret=document.getElementById('secret').value
+    var wurl='tableau url'
+    var scope="tableau:views:embed"
+    // var scopes = Array.from(scope).map(({ value }) => value);
+    var token= createToken(userid,kid,secret,iss,scopes);
+    document.getElementById("jwt").value=token;
+    let tp=`
+    <tableau-viz id="tableauViz" src="${wurl}" 
+      token="${token}"
+      height="100%"
+      width="100%"
+      toolbar="Bottom" hide-tabs>
+    </tableau-viz>`
+    document.getElementById('dash').innerHTML =tp;
+  }
+    
+</script>
 </head>
 <body>
     <!-- Navigation Bar -->
