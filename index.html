@@ -73,7 +73,7 @@ function go(){
     // Secret Key
     var secret="8nNt+gxIP7ZGX/TNbX1QnxCx9vz8MumglOoicsWwVZE="
     var wurl='https://prod-useast-b.online.tableau.com/t/site/johnkeegan/views/TCSanDiegoZooWorkbookEB4_2/StarterDashboard'
-    var scope="['tableau:views:embed']"
+    var scope="tableau:views:embed"
     var scopes = Array.from(scope).map(({ value }) => value);
     console.log(scopes)
     var token= createToken(userid,kid,secret,iss,scope);
