@@ -65,10 +65,13 @@ function base64url(source) {
   return encodedSource;
 }
 function go(){
-    var userid="jkeegan@salesforce.com"
-    var iss=document.getElementById('iss').value
-    var kid=document.getElementById('kid').value
-    var secret=document.getElementById('secret').value
+    var userid="tc24.hot.wcag@gmail.com"
+    // Client ID
+    var iss="f3720490-9472-454d-aef2-303a24c22909"
+    // Secret ID
+    var kid="effdeef5-7c27-44a2-bb62-ddfc75760c9d"
+    // Secret Key
+    var secret="8nNt+gxIP7ZGX/TNbX1QnxCx9vz8MumglOoicsWwVZE="
     var wurl='tableau url'
     var scope="tableau:views:embed"
     // var scopes = Array.from(scope).map(({ value }) => value);
@@ -86,7 +89,7 @@ function go(){
     
 </script>
 </head>
-<body>
+<body onload=go()">
     <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
@@ -123,7 +126,8 @@ function go(){
         <!-- Tableau Embedded Visualization -->
         <div class="embed-responsive embed-responsive-16by9">
             <!-- Replace the src attribute with your Tableau embed URL -->
-            <iframe class="embed-responsive-item" src="https://your-tableau-embed-url" tabindex="0"></iframe>
+            <div id='dash'>
+            </div>
         </div>
     </div>
 
