@@ -5,19 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tableau Embedded Visualization</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="icon" href="https://sandiegozoowildlifealliance.org/sites/default/files/favicon_0_0.ico" type="image/vnd.microsoft.icon">
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f8f9fa;
         }
         .navbar {
-            background-color: #343a40 !important;
+            background-color: #ffffff !important;
         }
         .navbar-brand {
-            color: #ffffff !important;
+            color: #343a40 !important;
         }
         .nav-link {
-            color: #ffffff !important;
+            color: #343a40 !important;
         }
         .footer {
             background-color: #343a40;
@@ -28,7 +29,7 @@
             margin-right: 10px;
         }
     </style>
-<script>
+<!-- <script>
     function createToken(userName,kid,secret,iss,scp){
   var header = {
     "alg": "HS256",
@@ -64,41 +65,58 @@ function base64url(source) {
   encodedSource = encodedSource.replace(/\//g, '_');
   return encodedSource;
 }
-function go(){
-    var userid="tc24.hot.wcag@gmail.com"
-    // Client ID
-    var iss="f3720490-9472-454d-aef2-303a24c22909"
-    // Secret ID
-    var kid="effdeef5-7c27-44a2-bb62-ddfc75760c9d"
-    // Secret Key
-    var secret="8nNt+gxIP7ZGX/TNbX1QnxCx9vz8MumglOoicsWwVZE="
-    var wurl='https://prod-useast-b.online.tableau.com/t/site/johnkeegan/views/TCSanDiegoZooWorkbookEB4_2/StarterDashboard'
-    var scope="tableau:views:embed"
-    var scopes = Array.from(scope).map(({ value }) => value);
-    console.log(scopes)
-    var token= createToken(userid,kid,secret,iss,scope);
-    // document.getElementById("jwt").value=token;
-    let tp=`
-    <tableau-viz id="tableauViz" src="${wurl}" 
-      token="${token}"
-      height="700"
-      width="1200"
-      toolbar="Bottom" hide-tabs>
-    </tableau-viz>`
-    document.getElementById('dash').innerHTML =tp;
-  }
     
 </script>
+
+        <script type="module">
+          import { SheetType, TableauEventType } from 'https://prod-useast-b.online.tableau.com/javascripts/api/tableau.embedding.3.latest.js';
+          (async () => {
+            // Get the viz object from the HTML web component
+            const viz = document.querySelector('tableau-viz');
+            var userid="tc24.hot.wcag@gmail.com"
+            // Client ID
+            var iss="f3720490-9472-454d-aef2-303a24c22909"
+            // Secret ID
+            var kid="effdeef5-7c27-44a2-bb62-ddfc75760c9d"
+            // Secret Key
+            var secret="8nNt+gxIP7ZGX/TNbX1QnxCx9vz8MumglOoicsWwVZE="
+            var scope="tableau:views:embed"
+            var scopes = Array.from(scope).map(({ value }) => value);
+            console.log(scopes)
+            var token= createToken(userid,kid,secret,iss,scope);
+            viz.token = token;
+
+            // Wait for the viz to become interactive
+            await new Promise((resolve, reject) => {
+              // Add an event listener to verify the viz becomes interactive
+              viz.addEventListener(TableauEventType.FirstInteractive, () => {
+                console.log('Viz is interactive!');
+                resolve();
+              });
+
+              viz.addEventListener(TableauEventType.VizLoadError, (error) => {
+                const message = JSON.parse(error.detail.message);
+                const errorMessage = JSON.parse(message.errorMessage);
+
+                const displayMessage = `ca-error-${errorMessage.result.errors[0].code}`;
+                reject(displayMessage);
+              });
+            });
+          })();
+        </script>  
+ -->
+
 </head>
-<body onload="go()">
+<body">
     <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <!-- Image to the left of the navbar -->
             <a class="navbar-brand" href="#">
                 <img src="https://sandiegozoowildlifealliance.org/themes/custom/park_stable/images/sdzwa-green.svg" alt="SDZWA Logo">
-                Your Company
+                
             </a>
+            <h1>SAN DIEGO ZOO</h1>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -125,11 +143,17 @@ function go(){
     <div class="container mt-5">
         <h1 class="text-center mb-4">Tableau Embedded Visualization</h1>
         <!-- Tableau Embedded Visualization -->
-       
-            <!-- Replace the src attribute with your Tableau embed URL -->
-            <div id='dash' >
-            </div>
-
+        <div class="container d-flex justify-content-center align-items-center mb-4">
+            <tableau-viz
+                  src="https://prod-useast-b.online.tableau.com/#/site/johnkeegan/views/TCSanDiegoZooWorkbookEB4_2/StarterDashboard?:iid=1"
+                  device="desktop"
+                  hide-tabs
+                  width="1350"
+                  height="750"
+                  toolbar="bottom"
+                >
+            </tableau-viz>
+        </div>
     </div>
 
     <!-- Footer -->
@@ -139,11 +163,12 @@ function go(){
         </div>
     </footer>
 
-    <!-- Bootstrap JS -->
+    <!-- JS Imports -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
     <script type="module" src="https://prod-useast-b.online.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
-</body>
+    <script src="/js/embed.js"></script>
+   </body>
 </html>
