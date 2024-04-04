@@ -48,7 +48,7 @@ var kid = "effdeef5-7c27-44a2-bb62-ddfc75760c9d"
 var secret = "8nNt+gxIP7ZGX/TNbX1QnxCx9vz8MumglOoicsWwVZE="
 var scope = "['tableau:views:embed']"
 var scopes = Array.from(scope).map(({ value }) => value);
-console.log(scopes)
+// console.log(scopes)
 var token = createToken(userid, kid, secret, iss, scope);
 
 // Initialize Tableau visualization
