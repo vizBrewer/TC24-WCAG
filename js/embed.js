@@ -1,5 +1,5 @@
 // Import necessary modules
-// import { SheetType, TableauEventType } from 'https://prod-useast-b.online.tableau.com/javascripts/api/tableau.embedding.3.latest.js';
+import { SheetType, TableauEventType } from 'https://prod-useast-b.online.tableau.com/javascripts/api/tableau.embedding.3.latest.js';
 
 // Function to create token
 function createToken(userName, kid, secret, iss, scp) {
