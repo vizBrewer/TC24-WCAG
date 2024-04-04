@@ -29,95 +29,18 @@
             margin-right: 10px;
         }
     </style>
-<!-- <script>
-    function createToken(userName,kid,secret,iss,scp){
-  var header = {
-    "alg": "HS256",
-    "typ": "JWT",
-    "iss": iss, //CONNECTED APP ID
-    "kid": kid, //CONNECTED APP SECRET ID
-  };
-  var stringifiedHeader = CryptoJS.enc.Utf8.parse(JSON.stringify(header));
-  var encodedHeader = base64url(stringifiedHeader);
-  var claimSet = {
-    "sub": userName, // THE USER NAME, like aalteirac@tableau.com 
-    "aud":"tableau",
-    "nbf":Math.round(new Date().getTime()/1000)-100,
-    "jti":new Date().getTime().toString(),
-    "iss": iss,
-    "scp": scp.split(","),
-    "exp": Math.round(new Date().getTime()/1000)+100
-  };
-  var stringifiedData = CryptoJS.enc.Utf8.parse(JSON.stringify(claimSet));
-  var encodedData = base64url(stringifiedData);
-  var token = encodedHeader + "." + encodedData;
-  var signature = CryptoJS.HmacSHA256(token, secret); //CONNECTED APP SECRET
-  signature = base64url(signature);
-  var signedToken = token + "." + signature;
-  return signedToken;
-}
-
-//Base64URL is a modification of the main (https://base64.guru/standards/main) Base64 standard. 
-function base64url(source) {
-  encodedSource = CryptoJS.enc.Base64.stringify(source);
-  encodedSource = encodedSource.replace(/=+$/, '');
-  encodedSource = encodedSource.replace(/\+/g, '-');
-  encodedSource = encodedSource.replace(/\//g, '_');
-  return encodedSource;
-}
-    
-</script>
-
-        <script type="module">
-          import { SheetType, TableauEventType } from 'https://prod-useast-b.online.tableau.com/javascripts/api/tableau.embedding.3.latest.js';
-          (async () => {
-            // Get the viz object from the HTML web component
-            const viz = document.querySelector('tableau-viz');
-            var userid="tc24.hot.wcag@gmail.com"
-            // Client ID
-            var iss="f3720490-9472-454d-aef2-303a24c22909"
-            // Secret ID
-            var kid="effdeef5-7c27-44a2-bb62-ddfc75760c9d"
-            // Secret Key
-            var secret="8nNt+gxIP7ZGX/TNbX1QnxCx9vz8MumglOoicsWwVZE="
-            var scope="tableau:views:embed"
-            var scopes = Array.from(scope).map(({ value }) => value);
-            console.log(scopes)
-            var token= createToken(userid,kid,secret,iss,scope);
-            viz.token = token;
-
-            // Wait for the viz to become interactive
-            await new Promise((resolve, reject) => {
-              // Add an event listener to verify the viz becomes interactive
-              viz.addEventListener(TableauEventType.FirstInteractive, () => {
-                console.log('Viz is interactive!');
-                resolve();
-              });
-
-              viz.addEventListener(TableauEventType.VizLoadError, (error) => {
-                const message = JSON.parse(error.detail.message);
-                const errorMessage = JSON.parse(message.errorMessage);
-
-                const displayMessage = `ca-error-${errorMessage.result.errors[0].code}`;
-                reject(displayMessage);
-              });
-            });
-          })();
-        </script>  
- -->
-
 </head>
 <body">
     <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" tabindex="0">
         <div class="container">
             <!-- Image to the left of the navbar -->
             <a class="navbar-brand" href="#">
-                <img src="https://sandiegozoowildlifealliance.org/themes/custom/park_stable/images/sdzwa-green.svg" alt="SDZWA Logo">
+                <img src="https://sandiegozoowildlifealliance.org/themes/custom/park_stable/images/sdzwa-green.svg" alt="SDZWA Logo" tabindex="0">
                 
             </a>
-            <h1>SAN DIEGO ZOO</h1>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <h1 tabindex="0">SAN DIEGO ZOO</h1>
+            <button tabindex="0" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -141,10 +64,10 @@ function base64url(source) {
 
     <!-- Main Content Section -->
     <div class="container mt-5">
-        <h1 class="text-center mb-4">Tableau Embedded Visualization</h1>
+        <h1 tabindex="0" class="text-center mb-4">Tableau Embedded Visualization</h1>
         <!-- Tableau Embedded Visualization -->
         <div class="container d-flex justify-content-center align-items-center mb-4">
-            <tableau-viz
+            <tableau-viz tabindex="0"
                   src="https://prod-useast-b.online.tableau.com/#/site/johnkeegan/views/TCSanDiegoZooWorkbookEB4_2/StarterDashboard?:iid=1"
                   device="desktop"
                   hide-tabs
@@ -157,7 +80,7 @@ function base64url(source) {
     </div>
 
     <!-- Footer -->
-    <footer class="footer bg-dark text-light py-4">
+    <footer tabindex="0" class="footer bg-dark text-light py-4">
         <div class="container text-center">
             <span>&copy; 2024 Tableau Conference. All rights reserved.</span>
         </div>
