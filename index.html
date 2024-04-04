@@ -28,6 +28,21 @@
             height: 40px;
             margin-right: 10px;
         }
+                /* Custom CSS to style the button */
+        .pretty-button {
+            padding: 8px 16px;
+            font-size: 14px;
+            background-color: #4D802D;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .pretty-button:hover {
+            background-color: #447128;
+        }
     </style>
 </head>
 <body">
@@ -64,13 +79,19 @@
 
     <!-- Main Content Section -->
     <div class="container mt-5">
-        <h1 tabindex="0" class="text-center mb-4">Tableau Embedded Visualization</h1>
+       <div class="col-md-12 centered-content">
+        <div class="row">
+            <h1 tabindex="0" class="text-center mb-4">Tableau Embedded Visualization</h1>
+            <button onclick="activateSheet()" id='changeButton' class="pretty-button ml-4 mb-4">Click to See After</button>
+        </div>
+    </div>
+
         <!-- Tableau Embedded Visualization -->
         <div class="container d-flex justify-content-center align-items-center mb-4">
             <tableau-viz 
                   id='dash'
                   tabindex="0"
-                  src="https://prod-useast-b.online.tableau.com/#/site/johnkeegan/views/TCSanDiegoZooWorkbookEB4_2/FinishedDashboard"
+                  src="https://prod-useast-b.online.tableau.com/#/site/johnkeegan/views/TCSanDiegoZooWorkbookEB4_2/StarterDashboard"
                   device="desktop"
                   hide-tabs
                   width="1350"
@@ -112,5 +133,28 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
     <script src="./js/token.js"></script>
     <script type="module" src="./js/embed.js"></script>
+    <script type="text/javascript">
+        async function activateSheet() {
+            try {
+                let viz = document.getElementById("dash");
+                let buttonText = document.getElementById("changeButton")
+                let workbook = viz.workbook;
+                let activeSheetName = workbook.activeSheet.name
+                if (activeSheetName !== 'Finished Dashboard') {
+                    await workbook.activateSheetAsync('Finished Dashboard');
+                    console.log('Sheet changed to finished');
+                    buttonText.innerHTML='Click to See Before'
+
+                } else {
+                    await workbook.activateSheetAsync('Starter Dashboard');
+                    console.log('Sheet changed to start');
+                    buttonText.innerHTML='Click to See After'
+                }
+            } catch (error) {
+                console.error('Error activating sheet:', error);
+            }
+        }
+
+    </script>
    </body>
 </html>
