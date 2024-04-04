@@ -28,7 +28,7 @@ function createToken(userName, kid, secret, iss, scp) {
 
 // Function to convert to Base64URL
 function base64url(source) {
-    encodedSource = CryptoJS.enc.Base64.stringify(source);
+    var encodedSource = CryptoJS.enc.Base64.stringify(source);
     encodedSource = encodedSource.replace(/=+$/, '');
     encodedSource = encodedSource.replace(/\+/g, '-');
     encodedSource = encodedSource.replace(/\//g, '_');
