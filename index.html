@@ -67,18 +67,37 @@
         <h1 tabindex="0" class="text-center mb-4">Tableau Embedded Visualization</h1>
         <!-- Tableau Embedded Visualization -->
         <div class="container d-flex justify-content-center align-items-center mb-4">
-            <tableau-viz tabindex="0"
-                  src="https://prod-useast-b.online.tableau.com/#/site/johnkeegan/views/TCSanDiegoZooWorkbookEB4_2/StarterDashboard?:iid=1"
+            <tableau-viz 
+                  id='dash'
+                  tabindex="0"
+                  src="https://prod-useast-b.online.tableau.com/#/site/johnkeegan/views/TCSanDiegoZooWorkbookEB4_2/FinishedDashboard"
                   device="desktop"
                   hide-tabs
                   width="1350"
-                  height="750"
-                  toolbar="bottom"
+                  height="900"
+                  toolbar="hidden"
                 >
             </tableau-viz>
         </div>
     </div>
+    <!-- <button id="switchDashboardBtn">Switch Dashboard</button> -->
 
+    <!-- Add your JS imports here -->
+    <!-- Add your external JS file here -->
+
+<!--     <script>
+        // Function to switch the embedded dashboard
+        function switchDashboard(newUrl) {
+            const viz = document.getElementById("dash");
+            viz.workbook.activateSheetAsync('Finished Dashboard');
+        }
+
+        // Event listener for the button click
+        document.getElementById("switchDashboardBtn").addEventListener("click", function() {
+            const newDashboardUrl = "https://your-tableau-server.com/path/to/new/dashboard";
+            switchDashboard(newDashboardUrl);
+        });
+    </script> -->
     <!-- Footer -->
     <footer tabindex="0" class="footer bg-dark text-light py-4">
         <div class="container text-center">
