@@ -59,7 +59,7 @@ Focusing on accessibility when using Tableau not only expands the reach and impa
 [Author Views for Accessibility](https://help.tableau.com/current/pro/desktop/en-us/accessibility_create_view.htm)
 
 
-
+===
 
 # 📈 Your Mission
 
@@ -76,7 +76,7 @@ Starter Dashboard Ideas
 * image in top left 
 * viz in tooltips 
     
-
+===
 Exercise Ideas: 
 
 * Dashboard Intro **EB**
@@ -118,7 +118,7 @@ Exercise Ideas:
 * Screen Reader
 
 
-
+===
 
 ## 🦜 Exercise 1 - Intro
 
@@ -138,7 +138,7 @@ Lack of Captions and Context
 
 Floating Object with Tooltip 
 
-
+===
 ## 🦏 Exercise 2 -  Visit Duration by Attraction
 
 ### Steps:
