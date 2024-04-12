@@ -5,14 +5,14 @@
 It was presented during Tableau Conference 2024 and uses Tableau Desktop version 2023.4. Some topics might be outdated if you’re looking at this beyond 2024.
 
 **Contents:** 
-[📖 Get Started](https://salesforce.quip.com/WTscApadPnWm#temp:C:XAY198645eb854540698a4ca2ca9)
-[📈 Your Mission](https://salesforce.quip.com/WTscApadPnWm#temp:C:XAYd72bfba84de84f6bbc0374aed) 
-[🦜 Exercise 1:](https://salesforce.quip.com/WTscApadPnWm#temp:C:XAYb52de606747346a6bf21a4f24) 
-[🦏 Exercise 2:](https://salesforce.quip.com/WTscApadPnWm#temp:C:XAYc57e590470334481bcd95ef7d)
-[🐢 Exercise 3:](https://salesforce.quip.com/WTscApadPnWm#temp:C:XAY1208d2dcb6764010a10e4693f) 
-[🐵 Exercise 4:](https://salesforce.quip.com/WTscApadPnWm#temp:C:XAY7918cd3a595d4d04b17622fff)
-[🦩 Exercise 5:](https://salesforce.quip.com/WTscApadPnWm#temp:C:XAY86e30beecd414ac69dd9cf506)
-[🎁 Wrap Up:](https://salesforce.quip.com/WTscApadPnWm#temp:C:XAYd5e309379f3d41a2b0c4c0a4e)
+[📖 Get Started](//)
+[📈 Your Mission](//) 
+[🦜 Exercise 1:](//) 
+[🦏 Exercise 2:](//)
+[🐢 Exercise 3:](//) 
+[🐵 Exercise 4:](//)
+[🦩 Exercise 5:](//)
+[🎁 Wrap Up:](//)
 
 
 
