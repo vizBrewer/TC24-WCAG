@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau Embedded Visualization</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="icon" href="https://sandiegozoowildlifealliance.org/sites/default/files/favicon_0_0.ico" type="image/vnd.microsoft.icon">
+    <style>
+        body {
+            font-family: Georgia, sans-serif;
+            background-color: #f8f9fa;
+        }
+        .navbar {
+            background-color: #ffffff !important;
+        }
+        .navbar-brand {
+            color: #343a40 !important;
+        }
+        .nav-link {
+            color: #343a40 !important;
+        }
+        .footer {
+            background-color: #343a40;
+            color: #ffffff;
+        }
+        .navbar img {
+            height: 40px;
+            margin-right: 10px;
+        }
+                /* Custom CSS to style the button */
+        .pretty-button {
+            padding: 8px 16px;
+            font-size: 14px;
+            background-color: #4D802D;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .pretty-button:hover {
+            background-color: #447128;
+        }
+    </style>
+</head>
+<body">
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
+        <div class="container">
+            <!-- Image to the left of the navbar -->
+            <a class="navbar-brand" href="#">
+                <img src="https://sandiegozoowildlifealliance.org/themes/custom/park_stable/images/sdzwa-green.svg" alt="SDZWA Logo" >
+                
+            </a>
+            <h1 tabindex="0">SAN DIEGO ZOO</h1>
+            <button tabindex="0" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Section -->
+    <div class="container mt-5">
+       <div class="col-md-12 centered-content">
+        <div class="row">
+            <h1 tabindex="0" class="text-center mb-4">Zoo Information Portal</h1>
+            <button onclick="activateSheet()" id='changeButton' class="pretty-button ml-4 mb-4">Click to See After</button>
+        </div>
+    </div>
+
+        <!-- Tableau Embedded Visualization -->
+        <div class="container d-flex justify-content-center align-items-center mb-4">
+            <tableau-viz 
+                  id='dash'
+                  tabindex="0"
+                  src="https://prod-useast-b.online.tableau.com/#/site/johnkeegan/views/TCSanDiegoZooWorkbookEB4_2/StarterDashboard"
+                  device="desktop"
+                  hide-tabs
+                  width="1350"
+                  height="900"
+                  toolbar="hidden"
+                >
+            </tableau-viz>
+        </div>
+    </div>
+    <!-- <button id="switchDashboardBtn">Switch Dashboard</button> -->
+
+    <!-- Add your JS imports here -->
+    <!-- Add your external JS file here -->
+
+<!--     <script>
+        // Function to switch the embedded dashboard
+        function switchDashboard(newUrl) {
+            const viz = document.getElementById("dash");
+            viz.workbook.activateSheetAsync('Finished Dashboard');
+        }
+
+        // Event listener for the button click
+        document.getElementById("switchDashboardBtn").addEventListener("click", function() {
+            const newDashboardUrl = "https://your-tableau-server.com/path/to/new/dashboard";
+            switchDashboard(newDashboardUrl);
+        });
+    </script> -->
+    <!-- Footer -->
+    <footer tabindex="0" class="footer bg-dark text-light py-4">
+        <div class="container text-center">
+            <span>&copy; 2024 Tableau Conference. All rights reserved.</span>
+        </div>
+    </footer>
+
+    <!-- JS Imports -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+    <script src="./js/token.js"></script>
+    <script type="module" src="./js/embed.js"></script>
+    <script type="text/javascript">
+        async function activateSheet() {
+            try {
+                let viz = document.getElementById("dash");
+                let buttonText = document.getElementById("changeButton")
+                let workbook = viz.workbook;
+                let activeSheetName = workbook.activeSheet.name
+                if (activeSheetName !== 'Finished Dashboard') {
+                    await workbook.activateSheetAsync('Finished Dashboard');
+                    console.log('Sheet changed to finished');
+                    buttonText.innerHTML='Click to See Before'
+
+                } else {
+                    await workbook.activateSheetAsync('Starter Dashboard');
+                    console.log('Sheet changed to start');
+                    buttonText.innerHTML='Click to See After'
+                }
+            } catch (error) {
+                console.error('Error activating sheet:', error);
+            }
+        }
+
+    </script>
+   </body>
+</html>
