@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau Embedded Visualization</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="icon" href="https://sandiegozoowildlifealliance.org/sites/default/files/favicon_0_0.ico" type="image/vnd.microsoft.icon">
+    <style>
+        body {
+            font-family: Georgia, sans-serif;
+            background-color: #f8f9fa;
+        }
+        .navbar {
+            background-color: #ffffff !important;
+        }
+        .navbar-brand {
+            color: #343a40 !important;
+        }
+        .nav-link {
+            color: #343a40 !important;
+        }
+        .footer {
+            background-color: #343a40;
+            color: #ffffff;
+        }
+        .navbar img {
+            height: 40px;
+            margin-right: 10px;
+        }
+                /* Custom CSS to style the button */
+        .pretty-button {
+            padding: 8px 16px;
+            font-size: 14px;
+            background-color: #4D802D;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .pretty-button:hover {
+            background-color: #447128;
+        }
+    </style>
+</head>
+<body">
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
+        <div class="container">
+            <!-- Image to the left of the navbar -->
+            <a class="navbar-brand" href="#">
+                <img src="images/Department_OTF.png" alt="SDZWA Logo" >
+                
+            </a>
+            <h1 tabindex="0">Department of the Future: </h1>
+            <button tabindex="0" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="./index.html">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Data</a>
+                    </li>
+<!--                     <li class="nav-item">
+                        <a class="nav-link" href="./focused.html">Focus Order</a>
+                    </li> -->
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Section -->
+    <div class="container mt-5">
+       <div class="col-md-12 centered-content">
+        <div class="row">
+            <h1 tabindex="0" class="text-center mb-4">Disease Information Portal</h1>
+            <button onclick="activateSheet()" id='changeButton' class="pretty-button ml-4 mb-4">Click to See After</button>
+            <p>The Disease Information Portal provides up-to-date information on Hopsitis Epidemica activity across the nation. Our surveillance efforts monitor the spread of Hopsitis Epidemica viruses, the impact on public health, and the effectiveness of prevention measures. This information is vital for healthcare providers, public health officials, and the general public to make informed decisions. The dashboard below visualizes the current state of the spread, showing geographic infection hotspots, demographic breakdowns by gender and hop strain, a trend of deaths, and detailed case breakdowns.</p>
+        </div>
+    </div>
+
+        <!-- Tableau Embedded Visualization src="https://prod-useast-b.online.tableau.com/#/site/johnkeegan/views/TCSanDiegoZooWorkbookEB4_2/FinishedDashboard"-->
+        <div class="container d-flex justify-content-center align-items-center mb-4">
+            <tableau-viz 
+                  id='dash'
+                  tabindex="0"
+                  
+                  src="https://prod-useast-b.online.tableau.com/#/site/johnkeegan/views/DemoaccessiblityCDChandson/InfectionDashboard"
+                  device="desktop"
+                  hide-tabs
+                  width="1350"
+                  height="1350"
+                  toolbar="hidden"
+                >
+            </tableau-viz>
+        </div>
+    </div>
+
+    <!-- Add your JS imports here -->
+    <!-- Add your external JS file here -->
+
+    <!-- Footer -->
+    <footer tabindex="0" class="footer bg-dark text-light py-4">
+        <div class="container text-center">
+            <span>&copy; 2024 Tableau Training. All rights reserved.</span>
+        </div>
+    </footer>
+
+    <!-- JS Imports -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+    <script src="./js/token.js"></script>
+    <script type="module" src="./js/embed.js"></script>
+    <script type="text/javascript">
+        async function activateSheet() {
+            try {
+                let viz = document.getElementById("dash");
+                let buttonText = document.getElementById("changeButton")
+                let workbook = viz.workbook;
+                let activeSheetName = workbook.activeSheet.name
+                if (activeSheetName !== 'Hopsitis Epidemica') {
+                    await workbook.activateSheetAsync('Hopsitis Epidemica');
+                    console.log('Sheet changed to finished');
+                    buttonText.innerHTML='Click to See Before'
+
+                } else {
+                    await workbook.activateSheetAsync('Infection Dashboard');
+                    console.log('Sheet changed to start');
+                    buttonText.innerHTML='Click to See After'
+                }
+            } catch (error) {
+                console.error('Error activating sheet:', error);
+            }
+        }
+
+    </script>
+   </body>
+</html>
